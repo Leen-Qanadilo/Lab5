@@ -7,7 +7,7 @@ from azure.storage.blob import BlobServiceClient
 
 ACCOUNT_NAME = "braintumor60106541"
 CONTAINER_NAME = "raw"
-LOCAL_DATASET = r"C:\Users\leenr\OneDrive\Desktop\brain_tumor_dataset"
+LOCAL_DATASET = "../brain_tumor_dataset"
 
 print("Files in yes folder:", os.listdir(os.path.join(LOCAL_DATASET, "yes")))
 print("Files in no folder:", os.listdir(os.path.join(LOCAL_DATASET, "no")))
