@@ -1,1 +1,24 @@
 
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: extract_features_component
+display_name: Extract Features Component
+version: 1
+type: command
+
+inputs:
+  raw_images:
+    type: uri_folder
+
+outputs:
+  features_output:
+    type: uri_folder
+
+environment: azureml:AzureML-pytorch-2.0-py310@latest
+
+code: .
+
+command: >-
+  python extract_features.py
+  --raw_images ${{inputs.raw_images}}
+  --features_output ${{outputs.features_output}}
