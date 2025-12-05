@@ -14,7 +14,29 @@ outputs:
   features_output:
     type: uri_folder
 
+environment: $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: extract_features_component
+display_name: Extract MRI Features
+version: 1
+type: command
+
+inputs:
+  input_data:
+    type: uri_folder
+
+outputs:
+  features_output:
+    type: uri_file
+
+code: ../src
+
 environment: azureml:AzureML-pytorch-2.0-py310@latest
+
+command: >-
+  python extract_features.py
+  --input_data ${{inputs.input_data}}
+  --output_path ${{outputs.features_output}}
+
 
 code: .
 
