@@ -1,0 +1,36 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+
+name: feature_selection_ga_component
+display_name: Feature Selection with Baseline + GA
+version: 1
+type: command
+
+inputs:
+  features_parquet:
+    type: uri_file
+
+outputs:
+  train_output:
+    type: uri_file
+  test_output:
+    type: uri_file
+  baseline_metrics:
+    type: uri_file
+  ga_metrics:
+    type: uri_file
+  selected_features:
+    type: uri_file
+
+code: ../src
+
+
+environment: azureml:brain_tumor_env:1
+
+command: >-
+  python feature_selection_ga.py
+  --features_parquet ${{inputs.features_parquet}}
+  --train_output ${{outputs.train_output}}
+  --test_output ${{outputs.test_output}}
+  --baseline_metrics ${{outputs.baseline_metrics}}
+  --ga_metrics ${{outputs.ga_metrics}}
+  --selected_features ${{outputs.selected_features}}
