@@ -15,7 +15,6 @@ outputs:
 
 code: ../src
 
-
 environment: azureml://registries/azureml/environments/mlflow-py312-inference/versions/26
 
 command: >-
