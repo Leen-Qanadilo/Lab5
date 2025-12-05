@@ -16,7 +16,7 @@ extract_features_component = load_component("../components/component.yaml")
 job = extract_features_component(
     input_data=Input(
         type="uri_folder",
-        path="azureml:data:tumor_images_raw:1",
+        path="azureml:tumor_data60106541:1",
     )
 )
 
