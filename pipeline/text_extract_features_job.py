@@ -26,6 +26,8 @@ job.outputs["features_output"] = Output(
     mode="rw_mount",
 )
 
+
+job.environment = "azureml://registries/azureml/environments/mlflow-py312-inference/versions/26"
 job.compute = "brainTumor60106541"
 job.experiment_name = "lab5_extract_features_test"
 
