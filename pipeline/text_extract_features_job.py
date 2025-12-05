@@ -19,10 +19,11 @@ ml_client = MLClient(
 job = command(
     code="../src",  # folder that contains extract_features.py
     command=(
-        "python extract_features.py "
-        "--input_data ${{inputs.input_data}} "
-        "--output_path ${{outputs.features_output}}"
-    ),
+    "pip install scikit-image && "
+    "python extract_features.py "
+    "--input_data ${{inputs.input_data}} "
+    "--output_path ${{outputs.features_output}}"
+),
     inputs={
         "input_data": Input(
             type="uri_folder",
