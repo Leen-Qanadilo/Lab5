@@ -15,7 +15,8 @@ outputs:
 
 code: ../src
 
-environment: "azureml:mlflow-py312-inference:26"
+
+environment: azureml://registries/azureml/environments/mlflow-py312-inference/versions/26
 
 command: >-
   python extract_features.py
