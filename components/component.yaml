@@ -1,8 +1,8 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 
-name: extract_features_component
+name: extract_features_v2_component 
 display_name: Extract MRI Features
-version: 42
+version: 1
 type: command
 
 inputs:
