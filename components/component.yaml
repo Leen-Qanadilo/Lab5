@@ -15,8 +15,7 @@ outputs:
 
 code: ../src
 
-
-environment: "azureml:brainTumor60106541:1"
+environment: "azureml:mlflow-py312-inference:26"
 
 command: >-
   python extract_features.py
