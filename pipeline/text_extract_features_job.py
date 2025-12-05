@@ -1,35 +1,47 @@
 from azure.identity import DefaultAzureCredential
-from azure.ai.ml import MLClient, Input, Output, load_component
+from azure.ai.ml import MLClient, Input, Output, command
 
-# 1) Connect to your workspace
+# ---------- Workspace info ----------
+SUBSCRIPTION_ID = "a485bb50-61aa-4b2f-bc7f-b6b53539b9d3"
+RESOURCE_GROUP = "rg-60106541"
+WORKSPACE_NAME = "tumor_data_60106541"
+COMPUTE_NAME = "brainTumor60106541"
+
+# ---------- Connect to workspace ----------
 ml_client = MLClient(
     DefaultAzureCredential(),
-    subscription_id="a485bb50-61aa-4b2f-bc7f-b6b53539b9d3",
-    resource_group_name="rg-60106541",
-    workspace_name="tumor_data_60106541",
+    subscription_id=SUBSCRIPTION_ID,
+    resource_group_name=RESOURCE_GROUP,
+    workspace_name=WORKSPACE_NAME,
 )
 
-# 2) Load the component from YAML
-extract_features_component = load_component("../components/component.yaml")
-
-# 3) Build the job (ONLY pass the input here)
-job = extract_features_component(
-    input_data=Input(
-        type="uri_folder",
-        path="azureml:tumor_data60106541:1",
-    )
+# ---------- Build the command job directly ----------
+job = command(
+    code="../src",  # folder that contains extract_features.py
+    command=(
+        "python extract_features.py "
+        "--input_data ${{inputs.input_data}} "
+        "--output_path ${{outputs.features_output}}"
+    ),
+    inputs={
+        "input_data": Input(
+            type="uri_folder",
+            path="azureml:tumor_data60106541:1", 
+        )
+    },
+    outputs={
+        "features_output": Output(
+            type="uri_file",
+            mode="rw_mount",
+        )
+    },
+    environment=(
+        "azureml://registries/azureml/environments/"
+        "mlflow-py312-inference/versions/26"
+    ),
+    compute=COMPUTE_NAME,
+    experiment_name="lab5_extract_features_test",
 )
-
-# 4) Configure the output on the job object
-job.outputs["features_output"] = Output(
-    type="uri_file",
-    mode="rw_mount",
-)
-
-
-job.environment = "azureml://registries/azureml/environments/mlflow-py312-inference/versions/26"
-job.compute = "brainTumor60106541"
-job.experiment_name = "lab5_extract_features_test"
 
 returned_job = ml_client.jobs.create_or_update(job)
 print("Job submitted!")
