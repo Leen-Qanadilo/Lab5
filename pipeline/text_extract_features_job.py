@@ -16,7 +16,7 @@ extract_features_component = load_component("../components/component.yaml")
 job = extract_features_component(
     input_data=Input(
         type="uri_folder",
-        path="azureml:data:tumor_images_raw:1"  
+        path="azureml:data:tumor_images_raw:1",
     ),
     features_output=Output(
         type="uri_file",
@@ -27,6 +27,6 @@ job = extract_features_component(
 job.compute = "brainTumor60106541"
 job.experiment_name = "lab5_extract_features_test"
 
-# 4) Submit
 returned_job = ml_client.jobs.create_or_update(job)
-print(returned_job.studio_url)
+print("Job submitted!")
+print("Studio URL:", returned_job.studio_url)
