@@ -35,10 +35,8 @@ job = command(
             mode="rw_mount",
         )
     },
-    environment=(
-        "azureml://registries/azureml/environments/"
-        "mlflow-py312-inference/versions/26"
-    ),
+    environment="azureml:AzureML-sklearn-1.5:1",
+
     compute=COMPUTE_NAME,
     experiment_name="lab5_extract_features_test",
 )
