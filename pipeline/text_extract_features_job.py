@@ -17,9 +17,8 @@ ml_client = MLClient(
 
 # ---------- Build the command job directly ----------
 job = command(
-    code="../src",  # folder that contains extract_features.py
+    code="../src",  
     command=(
-    "pip install scikit-image && "
     "python extract_features.py "
     "--input_data ${{inputs.input_data}} "
     "--output_path ${{outputs.features_output}}"
