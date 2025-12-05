@@ -10,7 +10,7 @@ ml_client = MLClient(
 )
 
 # 2) Load the component from YAML
-extract_features_component = load_component("../components/component.yml")
+extract_features_component = load_component("../components/component.yaml")
 
 # 3) Build the job
 job = extract_features_component(
