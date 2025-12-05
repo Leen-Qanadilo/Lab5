@@ -12,16 +12,18 @@ ml_client = MLClient(
 # 2) Load the component from YAML
 extract_features_component = load_component("../components/component.yaml")
 
-# 3) Build the job
+# 3) Build the job (ONLY pass the input here)
 job = extract_features_component(
     input_data=Input(
         type="uri_folder",
         path="azureml:data:tumor_images_raw:1",
-    ),
-    features_output=Output(
-        type="uri_file",
-        mode="rw_mount",
-    ),
+    )
+)
+
+# 4) Configure the output on the job object
+job.outputs["features_output"] = Output(
+    type="uri_file",
+    mode="rw_mount",
 )
 
 job.compute = "brainTumor60106541"
