@@ -15,7 +15,8 @@ outputs:
 
 code: ../src
 
-environment: azureml://registries/azureml/environments/mlflow-py312-inference/versions/26
+environment: azureml:skimage-env:1
+
 
 command: >-
   python extract_features.py
