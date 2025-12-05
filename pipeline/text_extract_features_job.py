@@ -35,7 +35,8 @@ job = command(
             mode="rw_mount",
         )
     },
-    environment="azureml:AzureML-sklearn-1.5:1",
+    environment = "azureml:brain_tumor_env:1"
+,
 
     compute=COMPUTE_NAME,
     experiment_name="lab5_extract_features_test",
